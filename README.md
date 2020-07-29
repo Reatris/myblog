@@ -1,2 +1,3 @@
 # myblog
 后端nodejs，express等实现的blog系统
+db文件夹内是链接数据库config文件自己配置
