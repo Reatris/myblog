@@ -1,0 +1,32 @@
+{% extends "layout.html" %}
+
+{% block main %}
+
+<ol class="breadcrumb">
+    <li><a href="#">管理首页</a></li>
+    <li><a href="#">用户信息</a></li>
+</ol>
+
+<table class="table table-bordered table-hover table-striped" style="color:#fc6423">
+    <tr >
+        <th>用户ID</th>
+        <th>用户名</th>
+        <th>密码</th>
+        <th>是否为管理员</th>
+    </tr>
+    {% for user in users %}
+    <tr>
+        <td>{{user.Id.toString()}}</td>
+        <td>{{user.Username}}</td>
+        <td>{{user.Password}}</td>
+        <td>{{user.Isadmin}}</td>
+    </tr>
+    {% endfor %}
+
+</table>
+<nav aria-label="...">
+    <ul class="pager">
+        <li><span>共{{counts}}条数据</span></li>
+    </ul>
+</nav>
+{% endblock %}

@@ -1,0 +1,55 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+
+<div class="papers">
+    <h2>{{content.Title}}</h2>
+    <p class="paperabout">
+        作者：<span class="paperinfo">{{content.Username}}</span>-
+        时间：<span class="paperinfo">{{content.Addtime}}</span>-
+        阅读：<span class="paperinfo">{{content.Num}}</span>-
+        分类于：<span class="paperinfo">{{content.Category}}</span>-
+        评论：<span class="paperinfo">{{content.Comment}}</span>
+        <input  type="hidden" id="contentid" name="contentid" value="{{content.Id}}">
+        <input  type="hidden" id="commit_num" name="commit_num" value="{{content.Comment}}">
+    </p>
+    <div class="contentss">
+        <p>{{content.Composition }}</p>
+        <div class="divsss"></div>
+        <div class="divsss"></div>
+    </div>
+
+    <div class="readmore"><a href="javascript:window.history.back()">返回</a></div>
+</div>
+
+<div id="comment">
+    <h3 ><strong>评论 </strong> <span class="much"> 共 <em id="commentCount">{{content.Comment}}</em> 条评论</span></h3>
+
+
+    <div style="font-size: 22px;">
+        <div>
+            <textarea  name="name" id="commentarea" placeholder="请填写评论"
+            style="height: 150px;width: 100%;"></textarea>
+            <input  type="hidden" id="contentid" name="contentid" value="{{content.Id}}">
+        </div>
+        <button type="submit" id="addcomment" class="btn btn-primary btn-lg">发表评论</button>
+
+    </div>
+    {% if userInfo.id %}
+    <input  type="hidden" id="Username" name="Username" value="{{userInfo.username}}">
+    {% else %}
+    <h4 class="loginfo" >你还没有登录，请先登录！</h4>
+    {% endif %}
+    {% if content.Comment== 0 %}
+    <h4 class="loginfo" >暂无评论，赶紧来指点一波江山吧！</h4>
+    {% endif %}
+
+    <div id="commentlist">
+        <div  id='commentlistin'class="content"></div>
+    </div>
+
+</div>
+
+
+{% endblock %}

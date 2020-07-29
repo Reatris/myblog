@@ -1,0 +1,34 @@
+{% extends "layout.html" %}
+
+{% block main %}
+
+<ol class="breadcrumb">
+    <li><a href="#">管理首页</a></li>
+    <li><a href="#">分类管理</a></li>
+</ol>
+
+<table class="table table-bordered table-hover table-striped" style="color:#fc6423">
+    <tr >
+        <th>分类ID</th>
+        <th>分类名称</th>
+        <th>分类操作</th>
+    </tr>
+    {% for category in categories %}
+    <tr>
+        <td>{{category.Id.toString()}}</td>
+        <td>{{category.Name}}</td>
+        <td>
+            <a href="/admin/category/edit?id={{category.Id.toString()}}&categoryName={{category.Name}}">修改</a> |
+            <a href="/admin/category/delete?id={{category.Id.toString()}}&categoryName={{category.Name}}">删除</a>
+        </td>
+
+    </tr>
+    {% endfor %
+</table>
+<nav aria-label="...">
+    <ul class="pager">
+        <li><span>共{{counts}}条数据</span></li>
+    </ul>
+</nav>
+
+{% endblock %}

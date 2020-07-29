@@ -1,0 +1,27 @@
+.jumbotrons {
+    text-align: center;
+    position: fixed;
+    margin-left: 50%;
+    left:-50% ;
+}
+.jumbotron{
+    text-align: center;
+    color: salmon;
+    background-color: rgba(111, 111, 111, 0);
+}
+.table th, .table td {
+    text-align: center;
+    vertical-align: middle!important;
+}
+.table{
+    table-layout: fixed;
+}
+.pager{
+    font-size: 20px;
+}
+.adminbackimg{
+    background-image: url(../img/backimg2.jpg);
+    background-repeat: no-repeat;
+    width: 100%;
+    height: 500px;
+}

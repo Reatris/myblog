@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>myblog</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" type="text/css" href="/public/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="/public/css/index.css">
+    <script type="text/javascript" src="/public/js/jquery.js"></script>
+    <script type="text/javascript" src="/public/js/bootstrap.js"></script>
+
+    <script type="text/javascript" src="/public/js/index.js"></script>
+
+</head>
+
+<body>
+
+    <header>
+        <div class="container-fluid header1">
+            <span>有你●心情咖啡屋</span></span>
+        </div>
+
+        <nav class="navbar navbar-default">
+            <div class="container-fluid">
+
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                        data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+
+                </div>
+
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+
+                    <ul class="nav navbar-nav">
+                        {%if Category == ''%}
+                        <li><a href="/" class="focus">首页</a></li>
+                        {%else%}
+                        <li><a href="/">首页</a></li>
+                        {%endif%}
+                        {%for cate in Categories%}
+                        {%if cate.Name == Category%}
+                        <li><a href="/?Category={{cate.Name}}" class="focus">{{cate.Name}}</a></li>
+                        {%else%}
+                        <li><a href="/?Category={{cate.Name}}">{{cate.Name}}</a></li>
+                        {%endif%}
+                        {%endfor%}
+                    </ul>
+
+                </div>
+
+            </div>
+        </nav>
+
+    </header>
+    <section>
+        <div class="container">
+            <div class="row">
+
+                <div class="col-lg-4 col-md-4">
+                    {% if userInfo.id %}
+                    <div class="userinfo spindown" id="userinfo">
+                        <div id="menu">
+                            <div id="open">
+                                <div id="openbutten" class="navH">
+                                    <div id="user_header_info">
+                                        <div class="header_photo" id="header_photos">
+                                            <img id="header_photo" src="" alt="">
+                                        </div>
+                                        <input type="hidden" id="Username" name="Username"
+                                            value="{{userInfo.username}}">
+                                        <input type="hidden" id="Userid" name="Userid" value="{{userInfo.id}}">
+                                        <input type="hidden" id="Friends" name="Friends" value="{{userInfo.Friends}}">
+                                        <p id="username_under_header" class="account">{{userInfo.username}}</p>
+                                    </div>
+                                </div>
+                                <div class="navBox">
+                                    <ul>
+                                        <li>
+                                            <h2 class="obtain">好友<i></i></h2>
+                                            <div class="secondary">
+                                                <h3>
+                                        <li onclick="myenuchange('index')"><span>消息</span></li>
+                                        </h3>
+                                        <h3>
+                                            <li onclick="myenuchange('addfriend')"><span>添加好友</span></li>
+                                        </h3>
+
+                                        <h3>
+                                            <li onclick="myenuchange('addfriend')"><span>添加好友</span></li>
+                                        </h3>
+                                        <h3>删除好友</h3>
+                                        <h3>安全管理</h3>
+                                        <h3>修改密码</h3>
+                                </div>
+                                </li>
+                                <li>
+                                    <h2 class="obtain">我的新闻<i></i></h2>
+                                    <div class="secondary">
+                                        <h3><a href="../../public/public/first.html"><span>新闻中心</span></a></h3>
+                                        <h3><a href="../../public/public/blogs.html"><span>我的新闻</span></a></h3>
+                                        <h3><a href="../../public/public/second.html"><span>留言板</span></a></h3>
+                                    </div>
+                                </li>
+                                <li>
+                                    <h2 class="obtain">天气<i></i></h2>
+                                    <div class="secondary">
+                                        <h3><a href="../../public/public/first.html"><span>最近天气</span></a></h3>
+                                    </div>
+                                </li>
+                                <li>
+                                    <h2 class="obtain">随笔<i></i></h2>
+                                    <div class="secondary">
+                                        <h3><a href="../../public/public/first.html"><span>心情随笔</span></a></h3>
+                                    </div>
+                                </li>
+
+                                {% if userInfo.Isadmin %}
+                                <li>
+                                    <h2 class="obtain">本站管理<i></i></h2>
+                                    <div class="secondary">
+                                        <h3><a href="/admin/"> 进入管理页面</a></h3>  
+                                    </div>
+                                </li>
+                                {% endif %}
+                                <li>
+                                    <h2 class="obtain">BLOG<i></i></h2>
+                                    <div class="secondary">
+                                        <h3><a href="/admin/content/specialadd">发布bolg</a></h3>
+                                    </div>
+                                </li>
+                                <li>
+                                    <h2 class="obtain">账号管理<i></i></h2>
+                                    <div class="secondary">
+                                        <h3><a href="javascript:;" class="logout">退出登录</a></h3>
+                                    </div>
+                                </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div id="menu_contents" class="menu_content">
+
+                            <!-- xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
+                            <div id="unapp">
+                                <div id="index" class="select">
+                                    <header class="header">
+                                        <span>消息</span>
+                                    </header>
+                                    <!-- 会话列表 -->
+                                    <div class="main">
+                                        <ul class="chatlist">
+                                        </ul>
+                                    </div>
+
+
+                                    <footer class="footers">
+                                        <div class="tab-item active">
+                                            <a>
+                                                <div class="tab-icon icon-recent"></div>
+                                                <span class="text">消息</span>
+                                                <span class="badge" id="unreadNumAll"></span>
+                                            </a>
+                                        </div>
+                                        <!-- <div class="tab-item">
+                                                <a>
+                                                    <div class="tab-icon icon-buddy"></div>
+                                                    <span class="text">联系人</span>
+                                                </a>
+    
+                                            </div>
+                                            <div class="tab-item">
+                                                <a>
+                                                    <div class="tab-icon icon-qworld"></div>
+                                                    <span class="text">动态</span>
+                                                </a>
+                                            </div> -->
+                                    </footer>
+                                </div>
+                                <div id="addfriend" class="select">
+                                    <div id="index">
+                                        <header class="header">
+                                            <span>添加好友</span>
+                                        </header>
+                                        <!-- 添加好友 -->
+                                        <div id="addfriend_from_before"></div>
+                                        <div id="addfriend_from">
+                                            <h2>添加好友</h2>
+                                            <div class="line">
+                                                <span>请输入用户名:</span>
+                                                <input type="text" name="addusername" title="username">
+                                                <input type="hidden" id="myname" name="myname"
+                                                    value="{{userInfo.username}}">
+                                                <input type="hidden" id="myid" name="myid" value="{{userInfo.id}}">
+                                            </div>
+                                            <div class="line">
+                                                <input type="submit" name="addfriend_submit" value="添加">
+                                            </div>
+                                            <h2 class="warning"></h2>
+                                        </div>
+
+
+                                        <footer class="footers">
+
+                                            <div class="tab-item">
+                                                <a>
+                                                    <div class="tab-icon icon-buddy"></div>
+                                                    <span class="text">联系人</span>
+                                                </a>
+
+                                            </div>
+
+                                        </footer>
+                                    </div>
+
+                                </div>
+                                <!-- talk -->
+                                <div id="talk">
+                                    <div class="talk-header">
+                                        <a class="back">
+                                            <img src="../../public/img/left.png" />
+                                        </a>
+                                        <p class="title"></p>
+                                    </div>
+                                    <!-- 消息详情 -->
+                                    <div class="message">
+                                    </div>
+                                    <div class="talk-footer">
+                                        <img class="function" src="../../public/img/function.png" />
+                                        <input class="msg_input" id="msg_input" type="text" oninput="checkInput();" />
+                                        <div class="msg_send" id="msg_send" onclick="sendBtn()">发送</div>
+                                    </div>
+                                </div>
+
+
+                                <div class="modal">
+                                    <div class="modal-content">
+                                        <img id="user_avatar" src="" />
+                                        <span class="modal-msg"><span style="color:#0094ff" id="user_name"></span><span
+                                                id="user_state"></span></span>
+                                    </div>
+                                </div>
+
+                                <audio id="audio-login" style="display:none;">
+                                    <source src="../../public/audio/login.mp3" type="audio/mpeg" />
+                                </audio>
+                                <audio id="audio-msg" style="display:none;">
+                                    <source src="../../public/audio/msg.mp3" type="audio/mpeg" />
+                                </audio>
+
+                                <script src="../../public/js/jquery.min.js"></script>
+
+                                <script src="../../public/js/app.js"></script>
+                                <script src="../../public/js/un.js"></script>
+                            </div>
+
+                            <!-- xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
+                        </div>
+                    </div>
+                    <div class="clearboth"></div>
+                </div>
+                {% else %}
+                <div class="register spindown" id="register" style="display: none">
+                    <h2>注册</h2>
+                    <div class="line">
+                        <span>用户名:</span>
+                        <input type="text" name="username" title="username">
+                    </div>
+                    <div class="line">
+                        <span>密码:</span>
+                        <input type="password" name="password" title="password">
+                    </div>
+                    <div class="line">
+                        <span>确认:</span>
+                        <input type="password" name="repassword" title="repassword">
+                    </div>
+                    <div class="uploadimg">
+                        请选择头像:<input type="file" name="img" id="img" required>
+                    </div>
+                    <div class="line">
+                        <input type="submit" name="submit" value="注册">
+                    </div>
+                    <p class="warning"></p>
+                    <p>已有账号? <a href="javascript:;">点击登录</a></p>
+                </div>
+
+                <div class="login spindown" id="login">
+                    <h2>登录</h2>
+                    <div class="line">
+                        <span>用户名:</span>
+                        <input type="text" name="username" title="username">
+                    </div>
+                    <div class="line">
+                        <span>密码:</span>
+                        <input type="password" name="password" title="password">
+                    </div>
+                    <div class="line">
+                        <input type="submit" name="submit" value="登录">
+                    </div>
+                    <h2 class="warning"></h2>
+                    <p>还没注册? <a href="javascript:;">点击注册</a></p>
+                </div>
+                {% endif %}
+                <div id="community">
+                    <h2>更多R+</h2>
+                    <h3><a href="https://github.com/Reatris" target="_blank">github</a></h3>
+                    <h3><a href="https://gitee.com/reatris" target="_blank">博主码云</a></h3>
+                    <h3> <a href="tencent://Message/?Uin=463125715&amp;websiteName=q-zone.qq.com&amp;Menu=yes"
+                            target="_blank">
+                            <i class="icon iconfont icon-qq"></i>联系博主
+                        </a></a></h3>
+                </div>
+            </div>
+            <div class="col-lg-8 col-md-8 moveup" id="content">
+
+                {% block content %}
+                {% endblock %}
+
+            </div>
+        </div>
+        </div>
+
+    </section>
+    <script src="../../public/js/menu.js"></script>
+    <script src="../../public/js/adapter.js"></script>
+    <!-- <script src="../../public/js/vue.js"></script> -->
+    <!-- <script src="../../public/vue_components/menu/help.js"></script> -->
+    <!-- <script src="../../public/vue_components/menu/menu.js"></script> -->
+    <!-- <script>
+         var vm = new Vue({
+            el: "#menu",
+            data: {
+                username:data.userInfo.username,
+            },
+            methods: {
+            },
+            components:{
+                'component-mymenu':myMenu,
+            }
+        })
+    </script> -->
+    <footer>
+        <p>Copyright © 王成 | Reatris | 2020-2021</p>
+        <div class="footdiv"><a href="#"><span class="glyphicon glyphicon-arrow-up"></span></a></div>
+    </footer>
+</body>
+
+</html>
